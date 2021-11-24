@@ -28,9 +28,6 @@ require_once 'search.php';
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -101,7 +98,7 @@ require_once 'search.php';
                     <!-- Topbar Search -->
                     <form method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2" value="<?php echo (isset($_POST['search']) && $_POST['search'] != '') ? $_POST['search'] : ''?>">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -182,8 +179,9 @@ require_once 'search.php';
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="#" id="generar_reporte" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+							<i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte
+                        </a>
                     </div>
 
                     <!-- Content Row -->
@@ -269,23 +267,16 @@ require_once 'search.php';
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
     
     <script> //  Función de reporte
 	$("#generar_reporte").click(function(event){;
 	  
 	  // Recorremos la tabla para contar el número de productos mostrados
 	  var num_rows = 0;  // Contador de checkbox marcados
-	  $("#dataTable tbody tr").each(function () {
-		  if($(this).find('td').eq(0).text() == 'No matching records found'){
-			  return false;
-		  }
+	  $(".container-fluid div.row div.mb-4").each(function () {
+		  //~ if($(this).find('td').eq(0).text() == 'No matching records found'){
+			  //~ return false;
+		  //~ }
 		  num_rows += 1;
 	  });
 
@@ -297,7 +288,7 @@ require_once 'search.php';
 		  //~ var href = $(this).attr('href');
 		  var url = 'print_inventario.php';
 
-		  var search = $("#dataTable_filter").find('input').val();  // Buscador de datatable (valor)
+		  var search = $("#search").val();  // Buscador de la barra de navegación (valor)
 
 		  // Si hay una búsqueda se coloca en la url
 		  if(search != ''){
