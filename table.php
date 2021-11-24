@@ -1,8 +1,6 @@
 <?php
 require_once 'conexion.php';
 //Llamado a bitacora
-require_once 'search.php';
-//Llamado a procesador
 ?>
 
 
@@ -53,7 +51,7 @@ require_once 'search.php';
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -64,7 +62,7 @@ require_once 'search.php';
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="table.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Lista</span>
@@ -96,19 +94,6 @@ require_once 'search.php';
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                    </form>
-
-                    <!-- Topbar Search -->
-                    <form method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2" value="<?php echo (isset($_POST['search']) && $_POST['search'] != '') ? $_POST['search'] : ''?>">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
                     </form>
 
                     <!-- Topbar Navbar -->
@@ -181,37 +166,61 @@ require_once 'search.php';
                     
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Inventario</h1>
+                        <a href="#" id="generar_reporte" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+							<i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte
+                         </a>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-						<?php while($mostrar=mysqli_fetch_array($result)){ ?>
-						<!-- Product details Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												<?php echo $mostrar['NombreProducto']." (".$mostrar['CodigoProducto'].")"?>
-											</div>
-											<div class="h6 mb-0 font-weight-bold text-gray-800"><?php echo $mostrar['Descripcion']?></div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo $mostrar['PrecioUnitario']?></div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-                        <?php } ?>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Lista de productos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Código de Producto</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Descripción</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Unidades</th>
+                                            <th>Dirección Tienda</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Código de Producto</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Descripción</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Unidades</th>
+                                            <th>Dirección Tienda</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php
+										$sql="SELECT * FROM tbl_catalogoproducto";
 
+										$result=mysqli_query($conn,$sql);
+										while($mostrar=mysqli_fetch_array($result)){
+										?>
+                                        <tr>
+                                            <td><?php echo $mostrar['CodigoProducto']?></td>
+                                            <td><?php echo $mostrar['NombreProducto']?></td>
+                                            <td><?php echo $mostrar['Descripcion']?></td>
+                                            <td><?php echo $mostrar['PrecioUnitario']?></td>
+                                            <td><?php echo $mostrar['Unidades']?></td>
+                                            <td><?php echo utf8_encode($mostrar['Direccion'])?></td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Content Row -->
 
                 </div>
                 <!-- /.container-fluid -->

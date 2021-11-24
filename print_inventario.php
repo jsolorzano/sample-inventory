@@ -30,7 +30,7 @@ $pdf->Cell(55,6,utf8_decode('Dirección'), 1, 1,'C');
 // Consulta de productos
 $pdf->SetFont('Arial','',8);
 if(isset($_GET['search']) && $_GET['search'] != ""){
-	$sql="SELECT * FROM tbl_catalogoproducto where ".
+	$sql = "SELECT * FROM tbl_catalogoproducto where ".
 	"CodigoProducto like '%".$_GET['search']."%' OR ".
 	"NombreProducto like '%".$_GET['search']."%' OR ".
 	"Descripcion like '%".$_GET['search']."%' OR ".
@@ -38,11 +38,11 @@ if(isset($_GET['search']) && $_GET['search'] != ""){
 	"Unidades like '%".$_GET['search']."%' OR ".
 	"Direccion like '%".$_GET['search']."%'";
 }else{
-	$sql="SELECT * FROM tbl_catalogoproducto";
+	$sql = "SELECT * FROM tbl_catalogoproducto";
 }
-$result=mysqli_query($conn,$sql);
+$result = mysqli_query($conn,$sql);
 // Líneas de productos resultantes
-while($mostrar=mysqli_fetch_array($result)){
+while($mostrar = mysqli_fetch_array($result)){
 	$pdf->Cell(15,6,utf8_decode($mostrar['CodigoProducto']), 1, 0,'C');
 	$pdf->Cell(25,6,utf8_decode($mostrar['NombreProducto']), 1, 0,'C');
 	$pdf->Cell(50,6,utf8_decode($mostrar['Descripcion']), 1, 0,'C');
