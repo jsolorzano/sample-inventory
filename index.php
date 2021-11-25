@@ -27,6 +27,7 @@ require_once 'search.php';
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -98,7 +99,7 @@ require_once 'search.php';
                     <!-- Topbar Search -->
                     <form method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." autocomplete="off"
                                 aria-label="Search" aria-describedby="basic-addon2" value="<?php echo (isset($_POST['search']) && $_POST['search'] != '') ? $_POST['search'] : ''?>">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -107,6 +108,7 @@ require_once 'search.php';
                             </div>
                         </div>
                     </form>
+                    <div id="suggestions"></div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -268,7 +270,8 @@ require_once 'search.php';
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     
-    <script> //  Función de reporte
+    <script> 
+	//  Función de reporte
 	$("#generar_reporte").click(function(event){;
 	  
 	  // Recorremos la tabla para contar el número de productos mostrados
@@ -299,6 +302,37 @@ require_once 'search.php';
 		  window.open(url);
 	  }
 	});
+	
+	// Función ajax para las sugerencias
+	$('#search').on('keyup', function() {
+        var search = $(this).val();		
+        var dataString = 'search='+search;
+        if(search == ""){
+			// Hacemos desaparecer el resto de sugerencias cuando no haya nada escrito
+			$("#suggestions").fadeOut(1000);
+		}else{
+			$.ajax({
+				type: "POST",
+				url: "search_ajax.php",
+				data: dataString,
+				success: function(data) {
+					//Escribimos las sugerencias que nos manda la consulta
+					$('#suggestions').fadeIn(1000).html(data);
+					//Al hacer click en algua de las sugerencias
+					$('.suggest-element').on('click', function(){
+						//Obtenemos la id unica de la sugerencia pulsada
+						var id = $(this).attr('id');
+						//Editamos el valor del input con data de la sugerencia pulsada
+						$('#search').val($('#'+id).attr('data'));
+						//Hacemos desaparecer el resto de sugerencias
+						$('#suggestions').fadeOut(1000);
+						//~ alert('Has seleccionado el '+id+' '+$('#'+id).attr('data'));
+						return false;
+					});
+				}
+			});
+		}
+    });
 	</script>
 
 </body>
