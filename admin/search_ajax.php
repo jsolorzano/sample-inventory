@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
 
-require_once 'conexion.php';
+require_once '../config/conexion.php';
 
 if(isset($_POST['search']) && $_POST['search'] != ''){
 	//~ echo "<pre>";

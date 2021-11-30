@@ -5,9 +5,9 @@ ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
 
-require_once 'conexion.php';
+require_once '../config/conexion.php';
 
-require "fpdf184/fpdf.php";
+require "../fpdf184/fpdf.php";
 
 header('Content-Type: text/html; charset=UTF-8');
 
