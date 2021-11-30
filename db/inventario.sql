@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-11-2021 a las 23:52:51
+-- Tiempo de generación: 30-11-2021 a las 15:11:23
 -- Versión del servidor: 5.7.36-0ubuntu0.18.04.1
 -- Versión de PHP: 7.4.26
 
@@ -72,9 +72,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `firstname`, `lastname`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', '123', '2019-11-19 17:10:15', '2019-11-19 17:10:15'),
-(2, 'example', 'example', 'example@gmail.com', '123', '2019-11-19 17:10:15', '2019-11-19 17:10:15'),
-(3, 'example2', 'example2', 'example2@gmail.com', '123', '2019-11-19 17:10:15', '2019-11-19 17:10:15');
+(1, 'admin', 'admin', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-19 17:10:15', '2019-11-19 17:10:15'),
+(2, 'example', 'example', 'example@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-19 17:10:15', '2019-11-19 17:10:15'),
+(3, 'example2', 'example2', 'example2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-19 17:10:15', '2019-11-19 17:10:15');
 
 --
 -- Índices para tablas volcadas

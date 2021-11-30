@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require_once '../config/conexion.php';
 
-require "../fpdf184/fpdf.php";
+require "../vendor/fpdf184/fpdf.php";
 
 header('Content-Type: text/html; charset=UTF-8');
 
