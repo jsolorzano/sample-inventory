@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
 
+require_once '../config/config.php';
 require_once '../config/conexion.php';
 
 if(isset($_POST['send'])){
@@ -28,20 +29,20 @@ if(isset($_POST['send'])){
 		 * en $data*/
 		if(count($data) == 0){
 			echo "Usuario o contraseña incorrectos";
-			header("refresh:2;url=http://localhost/pruebas/php/test_fpdf/inventario/login.php");
+			header("refresh:2;url=".WEB_HOST.SYSTEM_PATH."login.php");
 		}else{
 			session_start();
 			$_SESSION['logged_in'] = $data;
-			header('Location: http://localhost/pruebas/php/test_fpdf/inventario/admin/');
+			header('Location: '.WEB_HOST.SYSTEM_PATH.'admin/');
 		}
 	}else{
 		echo "Ha ocurrido un error inesperado, consulte con el administrador.";
-		header("refresh:5;url=http://localhost/pruebas/php/test_fpdf/inventario/login.php");
+		header("refresh:5;url=".WEB_HOST.SYSTEM_PATH."login.php");
 	}
 	
 }else{
 	echo "Ha ocurrido un error en el envío de datos, consulte con el administrador.";
-	header("refresh:5;url=http://localhost/pruebas/php/test_fpdf/inventario/login.php");
+	header("refresh:5;url=".WEB_HOST.SYSTEM_PATH."login.php");
 }
 
 ?>

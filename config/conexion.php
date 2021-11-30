@@ -1,5 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "123456", "inventario");
+
+$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 /* comprobar la conexión */
 if (mysqli_connect_errno()) {

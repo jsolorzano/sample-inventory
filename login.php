@@ -1,7 +1,8 @@
 <?php
 session_start();
+require_once 'config/config.php';
 if (isset($_SESSION['logged_in'])) {
-	header('Location: http://localhost/pruebas/php/test_fpdf/inventario/admin/');
+	header('Location: '.WEB_HOST.SYSTEM_PATH.'admin/');
 }
 ?>
 <!DOCTYPE html>
