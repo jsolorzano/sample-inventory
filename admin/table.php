@@ -176,6 +176,13 @@ require_once '../config/conexion.php';
 							<i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte
                         </a>
                     </div>
+                    
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <a href="#" id="new_product" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+							<i class="fas fa-plus fa-sm text-white-50"></i> Nuevo
+                        </a>
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -273,6 +280,48 @@ require_once '../config/conexion.php';
             </div>
         </div>
     </div>
+    
+    <!-- New product Modal-->
+    <div class="modal fade" id="modal_new_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header"> <!-- encabezado -->
+			<h5 class="modal-title" id="exampleModalLabel"></h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body"> <!-- cuerpo -->
+			<form action="products/add.php" method="POST" id="formulario">
+
+			  <div class="form-group">
+			  <label for="producto" class="col-form-label">Codigo del Producto</label>
+				<input type="text" class="form-control" id="CodigoProducto" name="CodigoProducto">
+				<label for="producto" class="col-form-label">Nombre del Producto</label>
+				<input type="text" class="form-control" id="NombreProducto" name="NombreProducto">
+				<label for="descripcion" class="col-form-label">Descripcion del Producto</label>
+				<input type="text" class="form-control" id="Descripcion" name="Descripcion">
+				<label for="precio" class="col-form-label">Precio Unitario</label>
+				<input type="text" class="form-control" id="PrecioUnitario" name="PrecioUnitario">
+				<label for="precio" class="col-form-label">Unidades</label>
+				<input type="text" class="form-control" id="Unidades" name="Unidades">
+				<label for="precio" class="col-form-label">Dirección</label>
+				<input type="text" class="form-control" id="Direccion" name="Direccion">
+
+			  </div>
+			  
+			  <div class="modal-footer"> <!-- pie -->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+				<button type="submit" class="btn btn-primary" id="register" name="register">Registrar</button>
+			  </div>
+			  
+			</form>
+
+		  </div>
+		  
+		</div>
+	  </div>
+	</div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -290,39 +339,7 @@ require_once '../config/conexion.php';
 
     <!-- Page level custom scripts -->
     <script src="../assets/js/demo/datatables-demo.js"></script>
-    
-    <script> //  Función de reporte
-	$("#generar_reporte").click(function(event){;
-	  
-	  // Recorremos la tabla para contar el número de productos mostrados
-	  var num_rows = 0;  // Contador de checkbox marcados
-	  $("#dataTable tbody tr").each(function () {
-		  if($(this).find('td').eq(0).text() == 'No matching records found'){
-			  return false;
-		  }
-		  num_rows += 1;
-	  });
-
-	  if (num_rows < 1) {
-		  alert("Disculpe, no hay productos resultantes de la búsqueda");
-		  event.preventDefault();
-	  }else{
-
-		  //~ var href = $(this).attr('href');
-		  var url = 'print_inventario.php';
-
-		  var search = $("#dataTable_filter").find('input').val();  // Buscador de datatable (valor)
-
-		  // Si hay una búsqueda se coloca en la url
-		  if(search != ''){
-			  //~ $("#generar_reporte").attr('href', href+'?search='+search);
-			  url = url+'?search='+search;
-		  };
-		  
-		  window.open(url);
-	  }
-	});
-	</script>
+    <script src="../assets/js/products.js"></script>
 
 </body>
 
