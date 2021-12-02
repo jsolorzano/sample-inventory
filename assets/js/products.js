@@ -75,5 +75,19 @@ function modal_edit(id){
 
 // Función de control de modal para eliminación de productos
 function modal_delete(id){
-	console.log(id);
+	if(confirm("La operación no se puede deshacer, ¿Está seguro de eliminar el producto?")){
+		var dataString = 'id='+id;
+		$.ajax({
+			type: "POST",
+			url: "products/delete.php",
+			data: dataString,
+			success: function(data) {
+				// Convertir el JSON recibido a un objeto en javaScript
+				data = JSON.parse(data);
+				//~ console.log(data);
+				alert(data.message);
+				location.reload();
+			}
+		}, 'json');
+	}	
 }
