@@ -199,7 +199,7 @@ require_once '../config/conexion.php';
                                             <th>Descripción</th>
                                             <th>Precio Unitario</th>
                                             <th>Unidades</th>
-                                            <th>Dirección Tienda</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -209,7 +209,7 @@ require_once '../config/conexion.php';
                                             <th>Descripción</th>
                                             <th>Precio Unitario</th>
                                             <th>Unidades</th>
-                                            <th>Dirección Tienda</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -221,11 +221,22 @@ require_once '../config/conexion.php';
 										?>
                                         <tr>
                                             <td><?php echo $mostrar['CodigoProducto']?></td>
-                                            <td><?php echo $mostrar['NombreProducto']?></td>
-                                            <td><?php echo $mostrar['Descripcion']?></td>
+                                            <td><?php echo utf8_encode($mostrar['NombreProducto'])?></td>
+                                            <td><?php echo utf8_encode($mostrar['Descripcion'])?></td>
                                             <td><?php echo $mostrar['PrecioUnitario']?></td>
                                             <td><?php echo $mostrar['Unidades']?></td>
-                                            <td><?php echo utf8_encode($mostrar['Direccion'])?></td>
+                                            <td>
+												<div class="text-center">
+													<div class="btn-group">
+														<a class="btn btn-warning" onclick="return modal_edit(<?php echo $mostrar['id']?>)" title="Editar"> 
+														<i class ="fa fa-edit"></i>
+														</a>  
+														<a class="btn btn-danger" onclick="return modal_delete(<?php echo $mostrar['id']?>)" title="Eliminar"> 
+														<i class ="fa fa-trash"></i>
+														</a>  
+												    </div>
+												</div>
+                                            </td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -295,17 +306,18 @@ require_once '../config/conexion.php';
 			<form action="products/add.php" method="POST" id="formulario">
 
 			  <div class="form-group">
-			  <label for="producto" class="col-form-label">Codigo del Producto</label>
+				<input type="hidden" id="id" name="id">
+			    <label for="CodigoProducto" class="col-form-label">Codigo del Producto</label>
 				<input type="text" class="form-control" id="CodigoProducto" name="CodigoProducto">
-				<label for="producto" class="col-form-label">Nombre del Producto</label>
+				<label for="NombreProducto" class="col-form-label">Nombre del Producto</label>
 				<input type="text" class="form-control" id="NombreProducto" name="NombreProducto">
-				<label for="descripcion" class="col-form-label">Descripcion del Producto</label>
+				<label for="Descripcion" class="col-form-label">Descripcion del Producto</label>
 				<input type="text" class="form-control" id="Descripcion" name="Descripcion">
-				<label for="precio" class="col-form-label">Precio Unitario</label>
+				<label for="PrecioUnitario" class="col-form-label">Precio Unitario</label>
 				<input type="text" class="form-control" id="PrecioUnitario" name="PrecioUnitario">
-				<label for="precio" class="col-form-label">Unidades</label>
+				<label for="Unidades" class="col-form-label">Unidades</label>
 				<input type="text" class="form-control" id="Unidades" name="Unidades">
-				<label for="precio" class="col-form-label">Dirección</label>
+				<label for="Direccion" class="col-form-label">Dirección</label>
 				<input type="text" class="form-control" id="Direccion" name="Direccion">
 
 			  </div>

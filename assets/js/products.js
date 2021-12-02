@@ -33,9 +33,47 @@ $("#generar_reporte").click(function(event){
 // Función de control de modal para registro de productos
 $("#new_product").click(function(){
 
-  //~ $("#formulario").trigger("reset");
+  $("#formulario").trigger("reset");
+  $("#formulario").attr("action", "products/add.php");
   $(".modal-header").css("background-color","#446ad7");
   $(".modal-header").css("color","white");
   $(".modal-title").text("Nuevo producto");
   $("#modal_new_edit").modal("show");
+  $("#formulario #register").text("Registrar");
 });
+
+// Función de control de modal para edición de productos
+function modal_edit(id){
+	var dataString = 'id='+id;
+	$.ajax({
+		type: "POST",
+		url: "products/search_ajax.php",
+		data: dataString,
+		success: function(data) {
+			// Convertir el JSON recibido a un objeto en javaScript
+			data = JSON.parse(data);
+			//~ console.log(data);
+			//~ console.log(data.CodigoProducto);
+			$("#formulario").trigger("reset");
+			$("#formulario").attr("action", "products/edit.php");
+			$(".modal-header").css("background-color","#446ad7");
+			$(".modal-header").css("color","white");
+			$(".modal-title").text("Editar producto");
+			$("#modal_new_edit").modal("show");
+			$("#formulario #register").text("Actualizar");
+			// Carga de datos
+			$("#formulario #id").val(data.id);
+			$("#formulario #CodigoProducto").val(data.CodigoProducto);
+			$("#formulario #NombreProducto").val(data.NombreProducto);
+			$("#formulario #Descripcion").val(data.Descripcion);
+			$("#formulario #PrecioUnitario").val(data.PrecioUnitario);
+			$("#formulario #Unidades").val(data.Unidades);
+			$("#formulario #Direccion").val(data.Direccion);
+		}
+	}, 'json');
+}
+
+// Función de control de modal para eliminación de productos
+function modal_delete(id){
+	console.log(id);
+}
