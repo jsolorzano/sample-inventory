@@ -16,11 +16,11 @@ if(isset($_POST['register'])){
 	//~ echo "<pre>";
 	//~ print_r($_POST);
 	$CodigoProducto = $_POST['CodigoProducto'];
-	$NombreProducto = $_POST['NombreProducto'];
-	$Descripcion = $_POST['Descripcion'];
+	$NombreProducto = utf8_decode($_POST['NombreProducto']);
+	$Descripcion = utf8_decode($_POST['Descripcion']);
 	$PrecioUnitario = $_POST['PrecioUnitario'];
 	$Unidades = $_POST['Unidades'];
-	$Direccion = $_POST['Direccion'];
+	$Direccion = utf8_decode($_POST['Direccion']);
 	
 	$sql = "INSERT INTO tbl_catalogoproducto (CodigoProducto, NombreProducto, Descripcion, PrecioUnitario, Unidades, Direccion) VALUES".
 	"('$CodigoProducto', '$NombreProducto', '$Descripcion', $PrecioUnitario, $Unidades, '$Direccion')";

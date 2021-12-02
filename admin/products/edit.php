@@ -17,11 +17,11 @@ if(isset($_POST['register'])){
 	//~ print_r($_POST);
 	$id = $_POST['id'];
 	$CodigoProducto = $_POST['CodigoProducto'];
-	$NombreProducto = $_POST['NombreProducto'];
-	$Descripcion = $_POST['Descripcion'];
+	$NombreProducto = utf8_decode($_POST['NombreProducto']);
+	$Descripcion = utf8_decode($_POST['Descripcion']);
 	$PrecioUnitario = $_POST['PrecioUnitario'];
 	$Unidades = $_POST['Unidades'];
-	$Direccion = $_POST['Direccion'];
+	$Direccion = utf8_decode($_POST['Direccion']);
 	
 	$sql = "UPDATE tbl_catalogoproducto SET CodigoProducto = '$CodigoProducto', ". 
 	"NombreProducto = '$NombreProducto', Descripcion = '$Descripcion', PrecioUnitario = $PrecioUnitario, ".
