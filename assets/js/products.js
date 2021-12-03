@@ -40,6 +40,7 @@ $("#new_product").click(function(){
   $(".modal-title").text("Nuevo producto");
   $("#modal_new_edit").modal("show");
   $("#formulario #register").text("Registrar");
+  $("#formulario #id").val('');
 });
 
 // Función de control de modal para edición de productos
@@ -72,6 +73,24 @@ function modal_edit(id){
 		}
 	}, 'json');
 }
+
+// Función para el registro/actualización de productos
+$("#register").click(function(){
+	var action = $("#formulario").attr("action");
+	var dataForm = $('#formulario').serialize();
+	$.ajax({
+		type: "POST",
+		url: action,
+		data: dataForm,
+		success: function(data) {
+			// Convertir el JSON recibido a un objeto en javaScript
+			data = JSON.parse(data);
+			//~ console.log(data);
+			alert(data.message);
+			location.reload();
+		}
+	}, 'json');
+});
 
 // Función de control de modal para eliminación de productos
 function modal_delete(id){

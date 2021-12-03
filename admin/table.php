@@ -324,7 +324,7 @@ require_once '../config/conexion.php';
 			  
 			  <div class="modal-footer"> <!-- pie -->
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-				<button type="submit" class="btn btn-primary" id="register" name="register">Registrar</button>
+				<button type="button" class="btn btn-primary" id="register" name="register">Registrar</button>
 			  </div>
 			  
 			</form>

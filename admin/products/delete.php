@@ -22,7 +22,7 @@ if(isset($_POST['id'])){
 	if($result = mysqli_query($conn, $sql)){
 		echo '{"message":"Producto borrado con éxito."}';
 	}else{
-		echo '{"message":"Ha ocurrido un error inesperado, consulte con el administrador."}';
+		echo '{"message":"Ha ocurrido un error en la operación, consulte con el administrador."}';
 	}
 }else{
 	echo '{"message":"Ha ocurrido un error inesperado, consulte con el administrador."}';

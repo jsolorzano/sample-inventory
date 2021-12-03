@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 
 require_once '../../config/conexion.php';
 
-if(isset($_POST['register'])){
+if(isset($_POST['CodigoProducto']) && $_POST['CodigoProducto'] != ""){
 	//~ echo "<pre>";
 	//~ print_r($_POST);
 	$CodigoProducto = $_POST['CodigoProducto'];
@@ -26,15 +26,18 @@ if(isset($_POST['register'])){
 	"('$CodigoProducto', '$NombreProducto', '$Descripcion', $PrecioUnitario, $Unidades, '$Direccion')";
 
 	if($result = mysqli_query($conn, $sql)){
-		echo "Producto registrado con éxito.";
-		header("refresh:1;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+		//~ echo "Producto registrado con éxito.";
+		//~ header("refresh:1;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+		echo '{"message":"Producto registrado con éxito."}';
 	}else{
-		echo "Ha ocurrido un error inesperado, consulte con el administrador.";
-		header("refresh:2;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+		//~ echo "Ha ocurrido un error en la operación, consulte con el administrador.";
+		//~ header("refresh:2;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+		echo '{"message":"Ha ocurrido un error en la operación, consulte con el administrador."}';
 	}
 }else{
-	echo "Ha ocurrido un error inesperado, consulte con el administrador.";
-	header("refresh:2;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+	//~ echo "Ha ocurrido un error inesperado, consulte con el administrador.";
+	//~ header("refresh:2;url=".WEB_HOST.SYSTEM_PATH."admin/table.php");
+	echo '{"message":"Ha ocurrido un error inesperado, consulte con el administrador."}';
 }
 
 ?>
