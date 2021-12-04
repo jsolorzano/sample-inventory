@@ -33,6 +33,9 @@ require_once '../config/conexion.php';
 
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+    <!-- Sweet Alert -->
+    <link href="../vendor/sweetalert/css/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -351,6 +354,10 @@ require_once '../config/conexion.php';
 
     <!-- Page level custom scripts -->
     <script src="../assets/js/demo/datatables-demo.js"></script>
+    
+    <!-- Sweet Alert -->
+    <script src="../vendor/sweetalert/js/sweetalert.min.js" rel="stylesheet"></script>
+    
     <script src="../assets/js/products.js"></script>
 
 </body>

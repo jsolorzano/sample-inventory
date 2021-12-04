@@ -20,12 +20,12 @@ if(isset($_POST['id'])){
 	$sql = "DELETE FROM tbl_catalogoproducto WHERE id = $id";
 
 	if($result = mysqli_query($conn, $sql)){
-		echo '{"message":"Producto borrado con éxito."}';
+		echo '{"message":"Producto borrado con éxito.","message_type":"success"}';
 	}else{
-		echo '{"message":"Ha ocurrido un error en la operación, consulte con el administrador."}';
+		echo '{"message":"Ha ocurrido un error en la operación, consulte con el administrador.","message_type":"warning"}';
 	}
 }else{
-	echo '{"message":"Ha ocurrido un error inesperado, consulte con el administrador."}';
+	echo '{"message":"Ha ocurrido un error inesperado, consulte con el administrador.","message_type":"warning"}';
 }
 
 ?>

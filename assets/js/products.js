@@ -78,6 +78,7 @@ function modal_edit(id){
 $("#register").click(function(){
 	var action = $("#formulario").attr("action");
 	var dataForm = $('#formulario').serialize();
+	var buttonText = $("#formulario #register").text();
 	$.ajax({
 		type: "POST",
 		url: action,
@@ -86,27 +87,55 @@ $("#register").click(function(){
 			// Convertir el JSON recibido a un objeto en javaScript
 			data = JSON.parse(data);
 			//~ console.log(data);
-			alert(data.message);
-			location.reload();
+			//~ alert(data.message);
+			//~ location.reload();
+			swal({ 
+				title: buttonText, 
+				text: data.message, 
+				type: data.message_type 
+			},function(){
+				location.reload();
+			});
 		}
 	}, 'json');
 });
 
 // Función de control de modal para eliminación de productos
 function modal_delete(id){
-	if(confirm("La operación no se puede deshacer, ¿Está seguro de eliminar el producto?")){
-		var dataString = 'id='+id;
-		$.ajax({
-			type: "POST",
-			url: "products/delete.php",
-			data: dataString,
-			success: function(data) {
-				// Convertir el JSON recibido a un objeto en javaScript
-				data = JSON.parse(data);
-				//~ console.log(data);
-				alert(data.message);
-				location.reload();
-			}
-		}, 'json');
-	}	
+	//~ if(confirm("La operación no se puede deshacer, ¿Está seguro de eliminar el producto?")){
+	swal({
+		title: "La operación de eliminación no se puede deshacer.",
+		text: "¿Está seguro de eliminar el producto?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Eliminar",
+		cancelButtonText: "Cancelar",
+		closeOnConfirm: false,
+		closeOnCancel: true
+	},function(isConfirm){
+		if (isConfirm) {
+			var dataString = 'id='+id;
+			$.ajax({
+				type: "POST",
+				url: "products/delete.php",
+				data: dataString,
+				success: function(data) {
+					// Convertir el JSON recibido a un objeto en javaScript
+					data = JSON.parse(data);
+					//~ console.log(data);
+					//~ alert(data.message);
+					//~ location.reload();
+					swal({ 
+						title: "Eliminar", 
+						text: data.message, 
+						type: data.message_type 
+					},function(){
+						location.reload();
+					});
+				}
+			}, 'json');
+		}
+	});
+	//~ }
 }
