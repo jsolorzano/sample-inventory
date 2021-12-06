@@ -62,16 +62,29 @@ require_once 'search.php';
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
 
-            <!-- Nav Item - Tables -->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sistema
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="table.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Lista</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Mantenimiento</span>
                 </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Módulos:</h6>
+                        <a class="collapse-item" href="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/products/index.php">Productos</a>
+                        <a class="collapse-item" href="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/users/index.php">Usuarios</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -150,7 +163,7 @@ require_once 'search.php';
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="../assets/img/undraw_profile.svg">
+                                    src="<?php echo WEB_HOST.SYSTEM_PATH;?>assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -258,8 +271,9 @@ require_once 'search.php';
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
+					<input type="hidden" id="base_url" value="<?php echo WEB_HOST.SYSTEM_PATH;?>">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../logout.php">Logout</a>
+                    <a class="btn btn-primary" href="<?php echo WEB_HOST.SYSTEM_PATH;?>logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -275,7 +289,10 @@ require_once 'search.php';
     <!-- Custom scripts for all pages-->
     <script src="../assets/js/sb-admin-2.min.js"></script>
     
-    <script> 
+    <script>
+	// Url base
+	var base_url = $("#base_url").val();
+	
 	//  Función de reporte
 	$("#generar_reporte").click(function(event){;
 	  
@@ -294,7 +311,7 @@ require_once 'search.php';
 	  }else{
 
 		  //~ var href = $(this).attr('href');
-		  var url = 'print_inventario.php';
+		  var url = base_url+'admin/print_inventario.php';
 
 		  var search = $("#search").val();  // Buscador de la barra de navegación (valor)
 
@@ -318,7 +335,7 @@ require_once 'search.php';
 		}else{
 			$.ajax({
 				type: "POST",
-				url: "search_ajax.php",
+				url: base_url+"admin/search_ajax.php",
 				data: dataString,
 				success: function(data) {
 					//Escribimos las sugerencias que nos manda la consulta

@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../config/config.php';
+require_once '../../config/config.php';
 if (!isset($_SESSION['logged_in'])) {
 	header('Location: '.WEB_HOST.SYSTEM_PATH.'login.php');
 }
-require_once '../config/conexion.php';
+require_once '../../config/conexion.php';
 //Llamado a bitacora
 ?>
 
@@ -23,19 +23,19 @@ require_once '../config/conexion.php';
     <title>SB Admin 2 - Tables</title>
 
     <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
     <!-- Sweet Alert -->
-    <link href="../vendor/sweetalert/css/sweetalert.css" rel="stylesheet">
+    <link href="../../vendor/sweetalert/css/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -60,21 +60,35 @@ require_once '../config/conexion.php';
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
 
-            <!-- Nav Item - Tables -->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sistema
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="table.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Lista</span>
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Mantenimiento</span>
                 </a>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Módulos:</h6>
+                        <a class="collapse-item active" href="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/products/index.php">Productos</a>
+                        <a class="collapse-item" href="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/users/index.php">Usuarios</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -139,7 +153,7 @@ require_once '../config/conexion.php';
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="../assets/img/undraw_profile.svg">
+                                    src="<?php echo WEB_HOST.SYSTEM_PATH;?>assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -289,7 +303,7 @@ require_once '../config/conexion.php';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../logout.php">Logout</a>
+                    <a class="btn btn-primary" href="<?php echo WEB_HOST.SYSTEM_PATH;?>logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -299,14 +313,14 @@ require_once '../config/conexion.php';
     <div class="modal fade" id="modal_new_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
-		  <div class="modal-header"> <!-- encabezado -->
+		  <div class="modal-header" id="modal_product"> <!-- encabezado -->
 			<h5 class="modal-title" id="exampleModalLabel"></h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
 		  </div>
 		  <div class="modal-body"> <!-- cuerpo -->
-			<form action="products/add.php" method="POST" id="formulario">
+			<form action="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/products/add.php" method="POST" id="formulario">
 
 			  <div class="form-group">
 				<input type="hidden" id="id" name="id">
@@ -326,6 +340,7 @@ require_once '../config/conexion.php';
 			  </div>
 			  
 			  <div class="modal-footer"> <!-- pie -->
+				<input type="hidden" id="base_url" value="<?php echo WEB_HOST.SYSTEM_PATH;?>">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
 				<button type="button" class="btn btn-primary" id="register" name="register">Registrar</button>
 			  </div>
@@ -339,26 +354,26 @@ require_once '../config/conexion.php';
 	</div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../../assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../assets/js/demo/datatables-demo.js"></script>
+    <script src="../../assets/js/demo/datatables-demo.js"></script>
     
     <!-- Sweet Alert -->
-    <script src="../vendor/sweetalert/js/sweetalert.min.js" rel="stylesheet"></script>
+    <script src="../../vendor/sweetalert/js/sweetalert.min.js" rel="stylesheet"></script>
     
-    <script src="../assets/js/products.js"></script>
+    <script src="../../assets/js/products.js"></script>
 
 </body>
 

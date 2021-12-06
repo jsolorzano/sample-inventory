@@ -1,3 +1,6 @@
+// Url base
+var base_url = $("#base_url").val();
+
 //  Función de reporte
 $("#generar_reporte").click(function(event){
   
@@ -16,7 +19,7 @@ $("#generar_reporte").click(function(event){
   }else{
 
 	  //~ var href = $(this).attr('href');
-	  var url = 'print_inventario.php';
+	  var url = base_url+'admin/print_inventario.php';
 
 	  var search = $("#dataTable_filter").find('input').val();  // Buscador de datatable (valor)
 
@@ -34,10 +37,10 @@ $("#generar_reporte").click(function(event){
 $("#new_product").click(function(){
 
   $("#formulario").trigger("reset");
-  $("#formulario").attr("action", "products/add.php");
+  $("#formulario").attr("action", base_url+"admin/products/add.php");
   $(".modal-header").css("background-color","#446ad7");
   $(".modal-header").css("color","white");
-  $(".modal-title").text("Nuevo producto");
+  $("#modal_product").text("Nuevo producto");
   $("#modal_new_edit").modal("show");
   $("#formulario #register").text("Registrar");
   $("#formulario #id").val('');
@@ -48,7 +51,7 @@ function modal_edit(id){
 	var dataString = 'id='+id;
 	$.ajax({
 		type: "POST",
-		url: "products/search_ajax.php",
+		url: base_url+"admin/products/search_ajax.php",
 		data: dataString,
 		success: function(data) {
 			// Convertir el JSON recibido a un objeto en javaScript
@@ -56,10 +59,10 @@ function modal_edit(id){
 			//~ console.log(data);
 			//~ console.log(data.CodigoProducto);
 			$("#formulario").trigger("reset");
-			$("#formulario").attr("action", "products/edit.php");
+			$("#formulario").attr("action", base_url+"admin/products/edit.php");
 			$(".modal-header").css("background-color","#446ad7");
 			$(".modal-header").css("color","white");
-			$(".modal-title").text("Editar producto");
+			$("#modal_product").text("Editar producto");
 			$("#modal_new_edit").modal("show");
 			$("#formulario #register").text("Actualizar");
 			// Carga de datos
@@ -118,7 +121,7 @@ function modal_delete(id){
 			var dataString = 'id='+id;
 			$.ajax({
 				type: "POST",
-				url: "products/delete.php",
+				url: base_url+"admin/products/delete.php",
 				data: dataString,
 				success: function(data) {
 					// Convertir el JSON recibido a un objeto en javaScript

@@ -48,7 +48,7 @@ if (isset($_SESSION['logged_in'])) {
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" method="post" action="admin/check.php">
+                                    <form class="user" method="post" action="<?php echo WEB_HOST.SYSTEM_PATH;?>admin/check.php">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="email" name="email" aria-describedby="emailHelp"
