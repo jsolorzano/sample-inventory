@@ -325,17 +325,17 @@ require_once '../../config/conexion.php';
 			  <div class="form-group">
 				<input type="hidden" id="id" name="id">
 			    <label for="CodigoProducto" class="col-form-label">Codigo del Producto</label>
-				<input type="text" class="form-control" id="CodigoProducto" name="CodigoProducto">
+				<input type="text" class="form-control" id="CodigoProducto" name="CodigoProducto" required>
 				<label for="NombreProducto" class="col-form-label">Nombre del Producto</label>
-				<input type="text" class="form-control" id="NombreProducto" name="NombreProducto">
+				<input type="text" class="form-control" id="NombreProducto" name="NombreProducto" required>
 				<label for="Descripcion" class="col-form-label">Descripcion del Producto</label>
-				<input type="text" class="form-control" id="Descripcion" name="Descripcion">
+				<input type="text" class="form-control" id="Descripcion" name="Descripcion" required>
 				<label for="PrecioUnitario" class="col-form-label">Precio Unitario</label>
-				<input type="text" class="form-control" id="PrecioUnitario" name="PrecioUnitario">
+				<input type="text" class="form-control" id="PrecioUnitario" name="PrecioUnitario" required>
 				<label for="Unidades" class="col-form-label">Unidades</label>
-				<input type="text" class="form-control" id="Unidades" name="Unidades">
+				<input type="text" class="form-control" id="Unidades" name="Unidades" required>
 				<label for="Direccion" class="col-form-label">Dirección</label>
-				<input type="text" class="form-control" id="Direccion" name="Direccion">
+				<input type="text" class="form-control" id="Direccion" name="Direccion" required>
 
 			  </div>
 			  
