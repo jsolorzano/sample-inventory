@@ -82,25 +82,39 @@ $("#register").click(function(){
 	var action = $("#formulario").attr("action");
 	var dataForm = $('#formulario').serialize();
 	var buttonText = $("#formulario #register").text();
-	$.ajax({
-		type: "POST",
-		url: action,
-		data: dataForm,
-		success: function(data) {
-			// Convertir el JSON recibido a un objeto en javaScript
-			data = JSON.parse(data);
-			//~ console.log(data);
-			//~ alert(data.message);
-			//~ location.reload();
-			swal({ 
-				title: buttonText, 
-				text: data.message, 
-				type: data.message_type 
-			},function(){
-				location.reload();
-			});
-		}
-	}, 'json');
+	if($("#formulario #CodigoProducto").val() == ""){
+		swal({title: buttonText, text: "El código está vacío o no es válido.", type: "warning"});
+	}else if($("#formulario #NombreProducto").val() == "" || jQuery.isNumeric($("#formulario #NombreProducto").val())){
+		swal({title: buttonText, text: "El nombre del producto está vacío o no es válido.", type: "warning"});
+	}else if($("#formulario #Descripcion").val() == "" || jQuery.isNumeric($("#formulario #Descripcion").val())){
+		swal({title: buttonText, text: "La descripción del producto está vacío o no es válido.", type: "warning"});
+	}else if($("#formulario #PrecioUnitario").val() == "" || !jQuery.isNumeric($("#formulario #PrecioUnitario").val())){
+		swal({title: buttonText, text: "El precio del producto está vacío o no es válido.", type: "warning"});
+	}else if($("#formulario #Unidades").val() == "" || !jQuery.isNumeric($("#formulario #Unidades").val())){
+		swal({title: buttonText, text: "Las unidades del producto está vacío o no es válido.", type: "warning"});
+	}else if($("#formulario #Direccion").val() == "" || jQuery.isNumeric($("#formulario #Direccion").val())){
+		swal({title: buttonText, text: "La dirección del producto está vacío o no es válido.", type: "warning"});
+	}else{
+		$.ajax({
+			type: "POST",
+			url: action,
+			data: dataForm,
+			success: function(data) {
+				// Convertir el JSON recibido a un objeto en javaScript
+				data = JSON.parse(data);
+				//~ console.log(data);
+				//~ alert(data.message);
+				//~ location.reload();
+				swal({ 
+					title: buttonText, 
+					text: data.message, 
+					type: data.message_type 
+				},function(){
+					location.reload();
+				});
+			}
+		}, 'json');
+	}
 });
 
 // Función de control de modal para eliminación de productos
